@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
                 sh '''
                     ls -la
@@ -22,14 +22,19 @@ pipeline {
                 '''
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 sh '''
-                     echo "Test stage"
                      find ./build/ -type f -name "index.html"
                      npm test
                 '''
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'test-results/junit.xml'
         }
     }
 }
