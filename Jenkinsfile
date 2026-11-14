@@ -28,6 +28,12 @@ pipeline {
         }
         */
         stage('Test') {
+            agent {
+                docker {
+                    image 'node:22.23.5-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
                      find ./build/ -type f -name "index.html"
