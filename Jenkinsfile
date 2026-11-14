@@ -1,4 +1,5 @@
 pipeline {
+    /*
     agent {
         docker {
             image 'node:22.23.5-alpine'
@@ -8,8 +9,10 @@ pipeline {
     environment {
         CI = 'true'
     }
+    */
 
     stages {
+        /*
         stage('Build') {
             steps {
                 sh '''
@@ -30,6 +33,8 @@ pipeline {
                 '''
             }
         }
+        
+        */
         stage('E2E') {
             agent {
                 docker {
