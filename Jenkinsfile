@@ -8,7 +8,6 @@ pipeline {
     environment {
         CI = 'true'
     }
-    agent any
 
     stages {
         /*
