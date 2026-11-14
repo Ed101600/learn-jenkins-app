@@ -1,14 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:22.23.5-alpine'
+        }
+    }
+
+    environment {
+        CI = 'true'
+    }
 
     stages {
         stage('build') {
-            agent {
-                docker {
-                    image 'node:22.23.5-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 sh '''
                     ls -la
