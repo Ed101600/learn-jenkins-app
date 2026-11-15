@@ -1,11 +1,5 @@
 pipeline {
-    agent { label 'docker'
-        
-    }
-
-    environment {
-        CI = 'true'
-    }
+    agent any
 
     stages {
 
