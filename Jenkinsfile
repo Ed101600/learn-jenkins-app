@@ -1,9 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:22.23.5-alpine'
-            reuseNode true
-        }
+    agent { label 'docker'
+        
     }
 
     environment {
@@ -11,8 +8,14 @@ pipeline {
     }
 
     stages {
-        /*
+
         stage('Build') {
+            agent {
+                docker {
+                    image 'node:22.23.5-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
                     ls -la
@@ -24,11 +27,17 @@ pipeline {
                 '''
             }
         }
-        */
+
         stage('Test') {
+            agent {
+                docker {
+                    image 'node:22.23.5-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
-                     find ./build/ -type f -name "index.html"
+                     test -f "build/index.html"
                      npm test
                 '''
             }
