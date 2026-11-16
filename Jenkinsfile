@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage(Run Tests') {
+        stage('Run Tests') {
             Parallel {
                 stage('Run Jest Tests') {
                     agent {
