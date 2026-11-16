@@ -23,7 +23,7 @@ pipeline {
         }
 
         stage('Run Tests') {
-            Parallel {
+            parallel {
                 stage('Run Jest Tests') {
                     agent {
                         docker {
