@@ -24,7 +24,7 @@ pipeline {
 
         stage('Run Tests') {
             parallel {
-                stage('Run Jest Tests') {
+                stage('Test') {
                     agent {
                         docker {
                             image 'node:22.23.5-alpine'
@@ -33,21 +33,25 @@ pipeline {
                     }
                     steps {
                         sh '''
-                            npm run test:jest
+                            test -f "build/index.html"
+                            npm test
                         '''
                     }
                 }
 
-                stage('Run Playwright Tests') {
+                stage('E2E') {
                     agent {
                         docker {
-                            image 'mcr.microsoft.com/playwright:v1.42.0-focal'
+                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
                             reuseNode true
                         }
                     }
                     steps {
                         sh '''
-                            npm run test:playwright
+                            npm install serve
+                            node_modules/.bin/serve -s build &
+                            sleep 10
+                            npx playwright test --reporter=html
                         '''
                     }
                 }
