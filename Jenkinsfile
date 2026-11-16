@@ -69,7 +69,6 @@ pipeline {
                 sh '''
                     echo "Deploying to production..."
                     node --version
-                    npm --version
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                 '''
